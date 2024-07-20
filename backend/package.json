@@ -4,7 +4,7 @@
   "description": "making urls tiny",
   "main": "main.ts",
   "scripts": {
-    "start:dev": "ts-node-dev src/main.ts",
+    "start:dev": "ts-node-dev --poll src/main.ts",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -38,8 +38,23 @@ services:
     networks:
       - docker_network
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - docker_network
+
 volumes:
   data:
+  node_modules:
 
 networks:
   docker_network:

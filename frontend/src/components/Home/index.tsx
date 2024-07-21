@@ -26,6 +26,13 @@ function Home() {
     setShortUrl(`${VITE_TINY_URL_BACKEND}/${response.data.shortUrl}`);
   };
 
+  const getLongUrl = async () => {
+    const response = await api.get<IShortUrlResponseData>("/url", {
+      shortUrl: shortUrl,
+    });
+    setLongUrl(response.data.fullUrl);
+  };
+
   return (
     <>
       <Flex gap="50%" justify="space-evenly">
@@ -34,7 +41,11 @@ function Home() {
           setLongUrl={setLongUrl}
           createShortUrl={createShortUrl}
         />
-        <ShortUrl shortUrl={shortUrl} setShortUrl={setShortUrl} />
+        <ShortUrl
+          shortUrl={shortUrl}
+          setShortUrl={setShortUrl}
+          getLongUrl={getLongUrl}
+        />
       </Flex>
     </>
   );

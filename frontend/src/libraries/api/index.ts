@@ -39,7 +39,7 @@ const api = <T>(
   });
 
 export default {
-  get: (...args: [url: string, variable?: {}]) => api("get", ...args),
+  get: <T>(...args: [url: string, variable?: {}]) => api<T>("get", ...args),
   post: <T>(...args: [url: string, variable?: {}]) => api<T>("post", ...args),
   put: (...args: [url: string, variable?: {}]) => api("put", ...args),
   patch: (...args: [url: string, variable?: {}]) => api("patch", ...args),

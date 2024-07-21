@@ -24,15 +24,31 @@ const redirectToShortUrl = async (req: Request<IUrlParam>, res: Response) => {
   const { shortUrl } = req.params;
 
   const urlFound = await urlModel.findOne({ shortUrl });
+
   if (urlFound) {
     await urlModel.updateOne({ shortUrl }, { clicks: urlFound.clicks + 1 });
     res.redirect(urlFound.fullUrl);
     return;
   }
+
   res.send("Couldn't find url");
+};
+
+const getLongUrl = async (
+  req: Request<{}, IUrl | null, {}, IUrlParam>,
+  res: Response<IUrl | null>
+) => {
+  const { shortUrl } = req.query;
+
+  const formatedShortUrl = shortUrl.split("/").pop();
+
+  const urlFound = await urlModel.findOne({ shortUrl: formatedShortUrl });
+
+  res.send(urlFound);
 };
 
 export default {
   createUrl,
   redirectToShortUrl,
+  getLongUrl,
 };

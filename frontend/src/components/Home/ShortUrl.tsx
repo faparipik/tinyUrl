@@ -4,9 +4,10 @@ import { CopyTwoTone } from "@ant-design/icons";
 type Props = {
   shortUrl: string;
   setShortUrl: (value: string) => void;
+  getLongUrl: () => void;
 };
 
-const ShortUrl = ({ shortUrl, setShortUrl }: Props) => {
+const ShortUrl = ({ shortUrl, setShortUrl, getLongUrl }: Props) => {
   return (
     <div>
       <h3>SHORT URL</h3>
@@ -27,7 +28,7 @@ const ShortUrl = ({ shortUrl, setShortUrl }: Props) => {
             />
           </Tooltip>
         </Space.Compact>
-        <Button type="primary" ghost>
+        <Button onClick={getLongUrl} type="primary" ghost>
           Get Long Url
         </Button>
       </Space>

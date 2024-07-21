@@ -2,7 +2,7 @@
   "name": "tiny-url-backend",
   "version": "1.0.0",
   "description": "making urls tiny",
-  "main": "main.ts",
+  "main": "src/main.ts",
   "scripts": {
     "start:dev": "ts-node-dev --poll src/main.ts",
     "build": "rimraf ./dist && tsc",
@@ -17,7 +17,9 @@
   "author": "Faruk Bruncevic",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 
 import { config } from "./config/config";
 import connectDb from "./config/dbConfig";
@@ -7,6 +8,8 @@ import urlRoutes from "./routes/url.route";
 const port = config.port;
 
 const app = express();
+
+app.use(cors<Request>());
 
 app.use(express.json());
 

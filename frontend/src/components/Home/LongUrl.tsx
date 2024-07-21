@@ -4,9 +4,10 @@ import { CopyTwoTone } from "@ant-design/icons";
 type Props = {
   longUrl: string;
   setLongUrl: (value: string) => void;
+  createShortUrl: () => void;
 };
 
-const LongUrl = ({ longUrl, setLongUrl }: Props) => {
+const LongUrl = ({ longUrl, setLongUrl, createShortUrl }: Props) => {
   return (
     <div>
       <h3>FULL URL</h3>
@@ -20,10 +21,13 @@ const LongUrl = ({ longUrl, setLongUrl }: Props) => {
             value={longUrl}
           />
           <Tooltip title="copy url">
-            <Button icon={<CopyTwoTone />} />
+            <Button
+              onClick={() => navigator.clipboard.writeText(longUrl)}
+              icon={<CopyTwoTone />}
+            />
           </Tooltip>
         </Space.Compact>
-        <Button type="primary" ghost>
+        <Button onClick={createShortUrl} type="primary" ghost>
           Create Short Url
         </Button>
       </Space>

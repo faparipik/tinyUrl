@@ -3,14 +3,37 @@ import { Flex } from "antd";
 
 import ShortUrl from "./ShortUrl";
 import LongUrl from "./LongUrl";
+import api from "../../libraries/api";
+
+const { VITE_TINY_URL_BACKEND } = import.meta.env;
+
+interface IShortUrlResponseData {
+  clicks: number;
+  createdAt: string;
+  fullUrl: string;
+  shortUrl: string;
+  updatedAt: string;
+}
 
 function Home() {
   const [longUrl, setLongUrl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string>("");
+
+  const createShortUrl = async () => {
+    const response = await api.post<IShortUrlResponseData>("/url", {
+      fullUrl: longUrl,
+    });
+    setShortUrl(`${VITE_TINY_URL_BACKEND}/${response.data.shortUrl}`);
+  };
+
   return (
     <>
       <Flex gap="50%" justify="space-evenly">
-        <LongUrl longUrl={longUrl} setLongUrl={setLongUrl} />
+        <LongUrl
+          longUrl={longUrl}
+          setLongUrl={setLongUrl}
+          createShortUrl={createShortUrl}
+        />
         <ShortUrl shortUrl={shortUrl} setShortUrl={setShortUrl} />
       </Flex>
     </>

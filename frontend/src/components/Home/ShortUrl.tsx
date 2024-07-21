@@ -21,7 +21,10 @@ const ShortUrl = ({ shortUrl, setShortUrl }: Props) => {
             defaultValue="git@github.com:ant-design/ant-design.git"
           />
           <Tooltip title="copy url">
-            <Button icon={<CopyTwoTone />} />
+            <Button
+              onClick={() => navigator.clipboard.writeText(shortUrl)}
+              icon={<CopyTwoTone />}
+            />
           </Tooltip>
         </Space.Compact>
         <Button type="primary" ghost>

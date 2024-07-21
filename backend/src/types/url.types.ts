@@ -7,3 +7,7 @@ export interface IUrl {
 }
 
 export interface IUrlModel extends IUrl, Document {}
+
+export interface IUrlParam {
+  shortUrl: string;
+}

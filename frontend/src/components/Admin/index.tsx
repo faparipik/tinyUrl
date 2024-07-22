@@ -1,7 +1,9 @@
+import UrlTable from "./UrlTable";
+
 function Admin() {
   return (
     <>
-      <div>test</div>
+      <UrlTable />
     </>
   );
 }

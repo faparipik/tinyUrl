@@ -83,19 +83,21 @@ const getMostVisitedUrls = async (
       },
     },
     {
+      $unwind: "$urls",
+    },
+    {
       $group: {
-        _id: "$url",
+        _id: { $arrayElemAt: [{ $split: ["$urls.fullUrl", "/"] }, 2] },
         clicksIn24Hours: { $sum: 1 },
         detail: { $first: "$$ROOT" },
       },
     },
     {
-      $replaceRoot: {
-        newRoot: {
-          $mergeObjects: [
-            { clicksIn24Hours: "$clicksIn24Hours" },
-            { $first: "$detail.urls" },
-          ],
+      $project: {
+        _id: "$_id",
+        clicksIn24Hours: "$clicksIn24Hours",
+        domain: {
+          $arrayElemAt: [{ $split: ["$detail.urls.fullUrl", "/"] }, 2],
         },
       },
     },

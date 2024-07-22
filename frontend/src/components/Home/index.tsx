@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Flex } from "antd";
+import toast from "react-hot-toast";
 
 import ShortUrl from "./ShortUrl";
 import LongUrl from "./LongUrl";
@@ -13,17 +14,25 @@ function Home() {
   const [shortUrl, setShortUrl] = useState<string>("");
 
   const createShortUrl = async () => {
-    const response = await api.post<IShortUrlResponseData>("/url", {
-      fullUrl: longUrl,
-    });
-    setShortUrl(`${VITE_TINY_URL_BACKEND}/${response.data.shortUrl}`);
+    try {
+      const response = await api.post<IShortUrlResponseData>("/url", {
+        fullUrl: longUrl,
+      });
+      setShortUrl(`${VITE_TINY_URL_BACKEND}/${response.data.shortUrl}`);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   const getLongUrl = async () => {
-    const response = await api.get<IShortUrlResponseData>("/url", {
-      shortUrl: shortUrl,
-    });
-    setLongUrl(response.data.fullUrl);
+    try {
+      const response = await api.get<IShortUrlResponseData>("/url", {
+        shortUrl: shortUrl,
+      });
+      setLongUrl(response.data.fullUrl);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   return (

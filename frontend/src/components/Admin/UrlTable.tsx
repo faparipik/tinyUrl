@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "antd";
+import toast from "react-hot-toast";
 import api from "../../libraries/api";
 import { ITableUrlResponseData } from "../../types/url.types";
 
@@ -26,10 +27,14 @@ function UrlTable() {
   }, []);
 
   const getData = async () => {
-    const response = await api.get<ITableUrlResponseData[]>(
-      "/url/most-visited-urls"
-    );
-    setData(response.data);
+    try {
+      const response = await api.get<ITableUrlResponseData[]>(
+        "/url/most-visited-urls"
+      );
+      setData(response.data);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   return (

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod";
 
 import RequestValidators from "../types/validation.types";
 
@@ -17,9 +16,6 @@ export function validateRequest(validators: RequestValidators) {
       }
       next();
     } catch (error) {
-      if (error instanceof ZodError) {
-        res.status(422);
-      }
       next(error);
     }
   };

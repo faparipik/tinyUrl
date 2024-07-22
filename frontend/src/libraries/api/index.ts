@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleValidationError } from "../../utils/handleValidationError";
 
 type Methods = "get" | "post" | "put" | "patch" | "delete";
 
@@ -32,7 +33,10 @@ const api = <T>(
       (response: any) => {
         resolve(response);
       },
-      () => {
+      (err) => {
+        if (err.response.data.status === 422) {
+          reject(handleValidationError(err.response));
+        }
         reject(defaults.error);
       }
     );

@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <Toaster />
       <RouterProvider router={router} />
     </>
   );
